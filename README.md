@@ -1,2 +1,2 @@
 # Casper-Custom
-Just a ghost.org theme
+Just a custom ghost.org theme
