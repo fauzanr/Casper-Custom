@@ -1,11 +1,14 @@
-<section class="mt-3"></section>
-<nav class="site-nav" style="border-bottom:2px blue solid;">
-    <div class="site-nav-left">
-        {{#if @site.logo}}
-            <a class="site-nav-logo" href="{{@site.url}}"><img src="{{@site.logo}}" alt="{{@site.title}}" /></a>
-        {{else}}
-            <a class="site-nav-logo" href="{{@site.url}}">{{@site.title}}</a>
-        {{/if}}
+<nav class="navbar navbar-expand-lg bg-primary">
+    {{#if @site.logo}}
+        <a class="site-nav-logo" href="{{@site.url}}"><img src="{{@site.logo}}" alt="{{@site.title}}" ></a>
+    {{else}}
+        <a class="site-nav-logo" href="{{@site.url}}">{{@site.title}}</a>
+    {{/if}}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nom-nav"
+        aria-controls="nom-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nom-nav">
         {{#if @site.navigation}}
             {{navigation}}
         {{/if}}
@@ -13,16 +16,14 @@
     <div class="site-nav-right">
         <div class="social-links">
             {{#if @site.facebook}}
-                <a class="social-link social-link-fb" href="{{facebook_url @site.facebook}}" title="Facebook" target="_blank" rel="noopener">{{> "icons/facebook"}}</a>
+            <a class="social-link social-link-fb" href="{{facebook_url @site.facebook}}" title="Facebook"
+                target="_blank" rel="noopener">{{> "icons/facebook"}}</a>
             {{/if}}
             {{#if @site.twitter}}
-                <a class="social-link social-link-tw" href="{{twitter_url @site.twitter}}" title="Twitter" target="_blank" rel="noopener">{{> "icons/twitter"}}</a>
+            <a class="social-link social-link-tw" href="{{twitter_url @site.twitter}}" title="Twitter" target="_blank"
+                rel="noopener">{{> "icons/twitter"}}</a>
             {{/if}}
         </div>
-        {{#if @labs.subscribers}}
-            <a class="subscribe-button" href="#subscribe" style="color:blue">Subscribe</a>
-        {{else}}
-            <a class="rss-button" href="https://feedly.com/i/subscription/feed/{{@site.url}}/rss/" title="RSS" target="_blank" rel="noopener">{{> "icons/rss"}}</a>
-        {{/if}}
+        <a class="rss-button" href="https://feedly.com/i/subscription/feed/{{@site.url}}/rss/" title="RSS" target="_blank" rel="noopener">{{> "icons/rss"}}</a>
     </div>
 </nav>

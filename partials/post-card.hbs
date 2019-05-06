@@ -3,42 +3,42 @@ post-card-large
 {{#unless feature_image}}no-image
 {{/unless}}">
 
+    <a href="{{url}}">
+        <div class="post-card mx-0 mb-4">
+        {{#if feature_image}}
+            <img src="{{asset "images/hehe.png"}}" style="
+                background-image:url({{img_url feature_image}});
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                max-height: 400px;
+                width: 100%;
+                " alt="{{title}}" />
+        {{else}}
+            <img src="{{asset "images/hehe.png"}}" style="
+                max-height: 400px;
+                width: 100%;
+                " alt="{{title}}" />
+        {{/if}}
+        </div>
 
-    {{#if feature_image}}
-    <a href="{{url}}" class="post-card mx-0 mb-4">
-        <img src="{{asset "images/hehe.png"}}" style="
-            background-image:url({{img_url feature_image}});
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            max-height: 400px;
-            width: 100%;
-            " alt="{{title}}" />
-    </a>
-    {{else}}
-    {{/if}}
-    </a>
+        <div class="post-card-content">
 
-    <div class="post-card-content">
+            <header class="post-card-header">
+                <section class="post-full-meta justify-content-between">
+                    {{#primary_tag}}
+                        <span class="badge badge-success">{{name}}</span>
+                    {{/primary_tag}}
+                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
+                </section>
+                <h2 class="post-card-title text-dark mt-3"><b>{{title}}</b></h2>
+            </header>
 
-        <header class="post-card-header">
-            <section class="post-full-meta justify-content-between">
-                {{#primary_tag}}
-                    <a href="{{url}}"><span class="badge badge-success">{{name}}</span></a>
-                {{/primary_tag}}
-                <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
+            <section class="post-card-excerpt">
+                <p class="text-secondary">{{excerpt words="33"}}</p>
             </section>
-            <h2 class="post-card-title mt-3">{{title}}</h2>
-        </header>
 
-        <section class="post-card-excerpt">
-            <p class="text-secondary">{{excerpt words="33"}}</p>
-            <a href="{{url}}" class="post-card-content-link py-3 px-0">
-                <button type="button" class="btn float-right" name="button">Lihat Post</button>
-            </a>
-        </section>
-
-
-    </div>{{!--/.post-card-content--}}
+        </div>
+    </a>
 
 </article>
