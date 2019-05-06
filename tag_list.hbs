@@ -1,0 +1,91 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{!-- {{#post}} --}}
+
+<div class="inner">
+    {{> "site-nav"}}
+
+    <article class="post-full no-image">
+
+        <header class="post-full-header">
+            <h1 class="site-title d-inline-block mb-5" style="border-bottom:2px blue solid;">Tag List</h1>
+        </header>
+
+        {{#get "tags" limit="all"}}
+            <div class="row">
+            {{#foreach tags}}
+
+                <div class="col-sm-6">
+                    <article class="post-card mx-0 {{post_class}}" style="min-height:auto;">
+
+                        <a class="post-card-image-link" href="{{url}}">
+
+                            {{#if feature_image}}
+                                <img class="post-card-image"
+                                    srcset="{{img_url feature_image size="s"}} 300w,
+                                            {{img_url feature_image size="m"}} 600w,
+                                            {{img_url feature_image size="l"}} 1000w,
+                                            {{img_url feature_image size="xl"}} 2000w"
+                                    sizes="(max-width: 1000px) 400px, 700px"
+                                    src="{{img_url feature_image size="m"}}"
+                                    alt="{{title}}"
+                                />
+                            {{else}}
+                                <img class="post-card-image"
+                                    srcset="{{asset "images/hehe.png" size="s"}} 300w,
+                                            {{asset "images/hehe.png" size="m"}} 600w,
+                                            {{asset "images/hehe.png" size="l"}} 1000w,
+                                            {{asset "images/hehe.png" size="xl"}} 2000w"
+                                    sizes="(max-width: 1000px) 400px, 700px"
+                                    src="{{asset "images/hehe.png" size="m"}}"
+                                    alt="{{name}}" />
+                            {{/if}}
+
+                            <div class="post-card-content">
+
+                                <div class="post-card-content-link pt-3">
+
+                                    <header class="post-card-header">
+                                        <h2 class="post-card-title">{{name}}</h2>
+                                    </header>
+
+                                    <section class="post-card-excerpt">
+                                        {{#if description}}
+                                            <p>{{description}}</p>
+                                        {{else}}
+                                            <p>-</p>
+                                        {{/if}}
+                                    </section>
+
+                                </div>
+
+                            </div>
+                        
+                        </a>
+
+                    </article>
+                </div>
+
+            {{/foreach}}
+            </div>
+        {{/get}}
+
+
+    </article>
+
+</div>
+
+{{!-- {{/post}} --}}
+
+{{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
+{{#contentFor "scripts"}}
+<script>
+$(function() {
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+});
+</script>
+{{/contentFor}}

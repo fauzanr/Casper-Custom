@@ -1,0 +1,79 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+{{!-- The main content area --}}
+<div class="inner">
+
+    {{> "site-nav"}}
+
+    {{^is "paged"}}
+
+    {{#get "posts" include="tags,authors" filter="featured:true"}}
+        {{#if posts}}
+
+            <h1 class="d-inline-block my-5" style="border-bottom:2px blue solid;"><b>Featured</b></h1>
+
+            <div class="container-fluid carousel mb-5 p-0" id="featured" data-flickity='{
+                    "wrapAround": true,
+                    "autoPlay": 5000,
+                    "selectedAttraction": 0.020}'>
+
+                {{#foreach posts}}
+                    <div class="carousel-cell w-100 m-3">
+                        <div class="card">
+                            <a href="{{url}}">
+                            {{#if feature_image}}
+                                <img src="{{asset "images/hehe.png"}}" style="
+                                background-image:url({{img_url feature_image}});
+                                background-repeat: no-repeat;
+                                background-size: cover;
+                                background-position: center;
+                                max-height: 400px;
+                                width: 100%;
+                                filter: brightness(70%);
+                                " alt="{{title}}" />
+                            {{else}}
+                                <img src="{{asset "images/hehe.png"}}" style="
+                                max-height: 400px;
+                                width: 100%;
+                                filter: brightness(70%);
+                                " alt="{{title}}" />
+                            {{/if}}
+                            <div class="card-img-overlay text-white">
+                                <section class="post-full-meta justify-content-between">
+                                    {{#primary_tag}}
+                                        <span class="badge badge-success">{{name}}</span>
+                                    {{/primary_tag}}
+                                    <time class="text-white" datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
+                                </section>
+                                <h2 class="card-title mt-3">{{title}}</h2>
+                                <section class="post-card-excerpt card-text">
+                                    <small>{{excerpt words="33"}}</small>
+                                </section>
+                            </div>
+                            </a>
+                        </div>
+                    </div>
+                {{/foreach}}
+            </div>
+            <hr id="featured">
+        {{/if}}
+    {{/get}}
+
+    {{/is}}
+
+    <h1 class="d-inline-block my-5" style="border-bottom:2px blue solid;"><b>Terbaru</b></h1>
+
+    <div class="row">
+        {{#foreach posts}}
+        <div class="col-md-6 col-12 mb-5">
+
+            {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
+            {{> "post-card"}}
+
+        </div>
+        {{/foreach}}
+    </div>
+
+</div>

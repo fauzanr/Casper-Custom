@@ -1,0 +1,105 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{!-- {{#post}} --}}
+
+<div class="inner">
+    {{> "site-nav"}}
+
+    <article class="post-full no-image">
+
+        <div class="site-header-content py-3">
+            <h1 class="site-title d-inline-block mb-5" style="border-bottom:2px blue solid;">Jurnalis</h1>
+        </div>
+
+        {{#get "authors" limit="all"}}
+
+        <div class="row">
+            
+            {{#foreach authors}}
+
+            <div class="col-sm-6">
+                <article
+                    class="post-card mx-0 {{post_class}} {{#unless cover_image}}no-image{{else}}{{#is "home"}}{{#has index="nth:6"}}post-card-large{{/has}}{{/is}}{{/unless}}"
+                    style="min-height:auto;">
+
+                    <a class="post-card-image-link" href="{{url}}">
+
+                        {{#if cover_image}}
+                            <img class="post-card-image" srcset="{{img_url cover_image size="s"}} 300w,
+                                            {{img_url cover_image size="m"}} 600w,
+                                            {{img_url cover_image size="l"}} 1000w,
+                                            {{img_url cover_image size="xl"}} 2000w"
+                                sizes="(max-width: 1000px) 400px, 700px" src="{{img_url cover_image size="m"}}"
+                                alt="{{name}}" />
+                        {{else}}
+                            <img class="post-card-image" srcset="{{asset "images/hehe.png" size="s"}} 300w,
+                                            {{asset "images/hehe.png" size="m"}} 600w,
+                                            {{asset "images/hehe.png" size="l"}} 1000w,
+                                            {{asset "images/hehe.png" size="xl"}} 2000w"
+                                sizes="(max-width: 1000px) 400px, 700px" src="{{asset "images/hehe.png" size="m"}}"
+                                alt="{{name}}" />
+                        {{/if}}
+
+                        <div class="post-card-content">
+
+                            <div class="post-card-content-link pt-3">
+                                
+                                <div class="row p-3">
+                                    <div class="col-auto">
+                                        {{#if profile_image}}
+                                            <div class="static-avatar">
+                                                <img class="author-profile-image" src="{{img_url profile_image size="xs"}}"
+                                                    alt="{{name}}" />
+                                            </div>
+                                        {{else}}
+                                            <div class="static-avatar author-profile-image">{{> "icons/avatar"}}</div>
+                                        {{/if}}
+                                    </div>
+                                    <div class="col-auto">
+                                        <header class="post-card-header">
+                                            <h2 class="post-card-title">{{name}}</h2>
+                                        </header>
+
+                                        <section class="post-card-excerpt">
+                                            {{#if bio}}
+                                                <p>{{bio}}</p>
+                                            {{else}}
+                                                <p>-</p>
+                                            {{/if}}
+                                        </section>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </a>
+
+                </article>
+            </div>
+
+            {{/foreach}}
+        </div>
+        {{/get}}
+
+
+    </article>
+
+</div>
+
+{{!-- {{/post}} --}}
+
+{{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
+{{#contentFor "scripts"}}
+<script>
+    $(function () {
+        var $postContent = $(".post-full-content");
+        $postContent.fitVids();
+    });
+</script>
+{{/contentFor}}
