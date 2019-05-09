@@ -4,34 +4,29 @@ post-card-large
 {{/unless}}">
 
     <a href="{{url}}">
-        <div class="post-card mx-0 mb-4">
+
+        <section class="post-full-meta justify-content-between">
+            {{#primary_tag}}
+                <span class="badge badge-success">{{name}}</span>
+            {{/primary_tag}}
+            <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
+        </section>
+
         {{#if feature_image}}
-            <img src="{{asset "images/hehe.png"}}" style="
-                background-image:url({{img_url feature_image}});
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: center;
-                max-height: 400px;
-                width: 100%;
-                " alt="{{title}}" />
-        {{else}}
-            <img src="{{asset "images/hehe.png"}}" style="
-                max-height: 400px;
-                width: 100%;
-                " alt="{{title}}" />
+            <div class="post-card mx-0 my-3">
+                <img src="{{asset "images/post.png"}}" style="
+                    background-image:url({{img_url feature_image}});
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+                    " alt="{{title}}" />
+            </div>
         {{/if}}
-        </div>
 
         <div class="post-card-content">
 
             <header class="post-card-header">
-                <section class="post-full-meta justify-content-between">
-                    {{#primary_tag}}
-                        <span class="badge badge-success">{{name}}</span>
-                    {{/primary_tag}}
-                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
-                </section>
-                <h2 class="post-card-title text-dark mt-3"><b>{{title}}</b></h2>
+                <h2 class="post-card-title text-dark mt-3" style="word-wrap:break-word"><b>{{title}}</b></h2>
             </header>
 
             <section class="post-card-excerpt">

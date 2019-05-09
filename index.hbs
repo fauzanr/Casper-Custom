@@ -3,38 +3,42 @@
 into the {body} of the default.hbs template --}}
 
 {{!-- The main content area --}}
-<div class="inner">
+{{^is "paged"}}
 
-    {{^is "paged"}}
+{{#get "posts" include="tags,authors" filter="featured:true"}}
+    {{#if posts}}
 
-    {{#get "posts" include="tags,authors" filter="featured:true"}}
-        {{#if posts}}
+        <h1 class="d-inline-block my-5" style="border-bottom:2px blue solid;"><b>Featured</b></h1>
 
-            <h1 class="d-inline-block my-5" style="border-bottom:2px blue solid;"><b>Featured</b></h1>
+        <div class="container-fluid carousel mb-5 p-0" id="featured" data-flickity='{
+                "prevNextButtons": false,
+                "wrapAround": true,
+                "autoPlay": 3000,
+                "selectedAttraction": 0.020}'>
 
-            <div class="container-fluid carousel mb-5 p-0" id="featured" data-flickity='{
-                    "prevNextButtons": false,
-                    "wrapAround": true,
-                    "autoPlay": 3000,
-                    "selectedAttraction": 0.020}'>
+            {{#foreach posts}}
+                <div class="carousel-cell w-100 m-3">
+                    <div class="card">
 
-                {{#foreach posts}}
-                    <div class="carousel-cell w-100 m-3">
-                        <div class="card">
-                            <a href="{{url}}">
+                        <a href="{{url}}">
+
                             {{#if feature_image}}
                                 <img src="{{asset "images/hehe.png"}}" style="
                                 background-image:url({{img_url feature_image}});
                                 background-repeat: no-repeat;
                                 background-size: cover;
                                 background-position: center;
-                                max-height: 400px;
+                                max-height: 550px;
                                 width: 100%;
                                 filter: brightness(70%);
                                 " alt="{{title}}" />
                             {{else}}
                                 <img src="{{asset "images/hehe.png"}}" style="
-                                max-height: 400px;
+                                background-image:url({{asset "images/dummy-post.png"}});
+                                background-repeat: no-repeat;
+                                background-size: cover;
+                                background-position: center;
+                                max-height: 550px;
                                 width: 100%;
                                 filter: brightness(70%);
                                 " alt="{{title}}" />
@@ -51,27 +55,28 @@ into the {body} of the default.hbs template --}}
                                     <small>{{excerpt words="33"}}</small>
                                 </section>
                             </div>
-                            </a>
-                        </div>
+
+                        </a>
                     </div>
-                {{/foreach}}
-            </div>
-        {{/if}}
-    {{/get}}
-
-    {{/is}}
-
-    <h1 class="d-inline-block my-5" style="border-bottom:2px blue solid;"><b>Terbaru</b></h1>
-
-    <div class="row">
-        {{#foreach posts}}
-        <div class="col-md-6 col-lg-4 col-12 mb-5">
-
-            {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
-            {{> "post-card"}}
-
+                </div>
+            {{/foreach}}
         </div>
-        {{/foreach}}
-    </div>
 
+    {{/if}}
+{{/get}}
+
+{{/is}}
+
+<h1 class="d-inline-block my-5" style="border-bottom:2px blue solid;"><b>Terbaru</b></h1>
+
+<div class="row">
+    {{#foreach posts}}
+    <div class="col-md-6 col-lg-4 col-xl-3 col-12 mb-5">
+
+        {{> "post-card"}}
+
+    </div>
+    {{/foreach}}
 </div>
+
+{{pagination}}
