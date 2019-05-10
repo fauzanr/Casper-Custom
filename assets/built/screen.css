@@ -2233,11 +2233,12 @@ body {
   -ms-flex-align: center;
   align-items: center;
   max-width: 920px;
+  font-size: 85%;
 }
-.post-template .post-content > p:first-child {
+/* .post-template .post-content > p:first-child {
   font-size: 1.25em;
   line-height: 1.5em;
-}
+} */
 .post-full-content .kg-image {
   max-width: 100%;
 }
