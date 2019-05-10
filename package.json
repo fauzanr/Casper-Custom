@@ -24,7 +24,7 @@
     "author": {
         "name": "Fauzan R",
         "email": "fauzanr17@gmail.com",
-        "url": "https://ghost.org"
+        "url": "https://github.com/fauzanr"
     },
     "gpm": {
         "type": "theme",
@@ -40,9 +40,9 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/TryGhost/Casper.git"
+        "url": "https://github.com/fauzanr/Casper-Custom.git"
     },
-    "bugs": "https://github.com/TryGhost/Casper/issues",
+    "bugs": "https://github.com/fauzanr/Casper-Custom/issues",
     "contributors": "https://github.com/TryGhost/Casper/graphs/contributors",
     "devDependencies": {
         "@tryghost/release-utils": "0.3.1",
