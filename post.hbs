@@ -100,7 +100,7 @@ into the {body} of the default.hbs template --}}
 
             </div>
 
-            <section class="post-full-comments">
+            <section class="post-full-comments my-5">
                 <div id="disqus_thread"></div>
                 <script>
                     (function() { // DON'T EDIT BELOW THIS LINE
@@ -119,62 +119,66 @@ into the {body} of the default.hbs template --}}
 
 
 {{!-- Post Lainnya --}}
-<aside class="read-next outer">
+{{#if primary_tag}}
 
-    <div class="inner">
+<div class="inner">
 
-        {{#if primary_tag}}
+    {{#get "posts" include="authors" filter="tags:{{primary_tag.slug}}+id:-{{id}}" limit="6" as |related_posts|}}
 
-            {{#get "posts" include="authors" filter="tags:{{primary_tag.slug}}+id:-{{id}}" limit="4" as |related_posts|}}
+        {{#if related_posts}}
 
-                {{#if related_posts}}
+            <h2 class="d-inline-block my-5" style="border-bottom:2px blue solid;">Lainnya di tag <a href="{{../primary_tag.url}}">{{../primary_tag.name}}</a></h2>
 
-                    <h2 class="d-inline-block my-5" style="border-bottom:2px blue solid;">Lainnya di tag {{../primary_tag.name}}</h2>
+            <div class="row mb-5">
+            {{#foreach related_posts}}
 
-                    <div class="row mb-5">
-                    {{#foreach related_posts}}
+                    <div class="col-lg-4 col-md-6 mb-5">
+                        <article class="{{post_class}}
+                        post-card-large
+                        {{#unless feature_image}}no-image
+                        {{/unless}}">
 
-                            <div class="col-md-6 mb-4">
-                                <div class="post-card-content border p-3">
+                            <a href="{{url}}">
+
+                                <section class="post-full-meta justify-content-between">
+                                    <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
+                                </section>
+
+                                {{#if feature_image}}
+                                    <div class="post-card mx-0 my-3">
+                                        <img src="{{asset "images/post.png"}}" style="
+                                            background-image:url({{img_url feature_image}});
+                                            background-repeat: no-repeat;
+                                            background-size: cover;
+                                            background-position: center;
+                                            " alt="{{title}}" />
+                                    </div>
+                                {{/if}}
+
+                                <div class="post-card-content">
 
                                     <header class="post-card-header">
-                                        <h2 class="post-card-title mt-3">
-                                        <a href="{{url}}">{{title}}</a></h2>
+                                        <h2 class="post-card-title text-dark mt-3" style="word-wrap:break-word"><b>{{title}}</b></h2>
                                     </header>
 
-                                    <hr>
-
-                                    <section class="post-full-meta justify-content-between">
-                                        {{#authors}}
-                                            <div class="author-name-tooltip">
-                                                {{name}}
-                                            </div>
-
-                                            {{#if profile_image}}
-                                                <a href="{{url}}" class="static-avatar">
-                                                    <img class="author-profile-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}" />
-                                                </a>
-                                            {{else}}
-                                                <a href="{{url}}" class="static-avatar author-profile-image">{{> "icons/avatar"}}</a>
-                                            {{/if}}
-                                        {{/authors}}
-                                        <time class="float-right" datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
-                                    </section>
-
                                 </div>
-                            </div>
+                            </a>
 
-                    {{/foreach}}
+                        </article>
                     </div>
-                    
-                {{/if}}
 
-            {{/get}}
-
+            {{/foreach}}
+            </div>
+            
         {{/if}}
 
-    </div>
-</aside>
+    {{/get}}
+
+</div>
+
+
+{{/if}}
+
 
 {{!-- Floating header which appears on-scroll, included from includes/floating-header.hbs --}}
 {{> floating-header}}

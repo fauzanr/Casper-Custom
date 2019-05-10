@@ -18,46 +18,43 @@ into the {body} of the default.hbs template --}}
 
             {{#foreach posts}}
                 <div class="carousel-cell w-100 m-3">
-                    <div class="card">
+                    <a href="{{url}}">
 
-                        <a href="{{url}}">
+                        {{#if feature_image}}
+                            <img src="{{asset "images/hehe.png"}}" style="
+                            background-image:url({{img_url feature_image}});
+                            background-repeat: no-repeat;
+                            background-size: cover;
+                            background-position: center;
+                            max-height: 550px;
+                            width: 100%;
+                            filter: brightness(70%);
+                            " alt="{{title}}" />
+                        {{else}}
+                            <img src="{{asset "images/hehe.png"}}" style="
+                            background-image:url({{asset "images/dummy-post.png"}});
+                            background-repeat: no-repeat;
+                            background-size: cover;
+                            background-position: center;
+                            max-height: 550px;
+                            width: 100%;
+                            filter: brightness(70%);
+                            " alt="{{title}}" />
+                        {{/if}}
+                        <div class="card-img-overlay text-white">
+                            <section class="post-full-meta justify-content-between">
+                                {{#primary_tag}}
+                                    <span class="badge badge-success">{{name}}</span>
+                                {{/primary_tag}}
+                                <time class="text-white" datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
+                            </section>
+                            <h2 class="card-title mt-3">{{title}}</h2>
+                            <section class="post-card-excerpt card-text">
+                                <small>{{excerpt words="33"}}</small>
+                            </section>
+                        </div>
 
-                            {{#if feature_image}}
-                                <img src="{{asset "images/hehe.png"}}" style="
-                                background-image:url({{img_url feature_image}});
-                                background-repeat: no-repeat;
-                                background-size: cover;
-                                background-position: center;
-                                max-height: 550px;
-                                width: 100%;
-                                filter: brightness(70%);
-                                " alt="{{title}}" />
-                            {{else}}
-                                <img src="{{asset "images/hehe.png"}}" style="
-                                background-image:url({{asset "images/dummy-post.png"}});
-                                background-repeat: no-repeat;
-                                background-size: cover;
-                                background-position: center;
-                                max-height: 550px;
-                                width: 100%;
-                                filter: brightness(70%);
-                                " alt="{{title}}" />
-                            {{/if}}
-                            <div class="card-img-overlay text-white">
-                                <section class="post-full-meta justify-content-between">
-                                    {{#primary_tag}}
-                                        <span class="badge badge-success">{{name}}</span>
-                                    {{/primary_tag}}
-                                    <time class="text-white" datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
-                                </section>
-                                <h2 class="card-title mt-3">{{title}}</h2>
-                                <section class="post-card-excerpt card-text">
-                                    <small>{{excerpt words="33"}}</small>
-                                </section>
-                            </div>
-
-                        </a>
-                    </div>
+                    </a>
                 </div>
             {{/foreach}}
         </div>
